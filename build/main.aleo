@@ -1,19 +1,18 @@
-program templateankara.aleo;
+program ankaraaew.aleo;
 
 record token:
     owner as address.private;
     amount as u64.private;
 
-
 mapping account:
-	key as address.public;
-	value as u64.public;
+    key as address.public;
+    value as u64.public;
 
 function mint_public:
     input r0 as address.public;
     input r1 as u64.public;
     async mint_public r0 r1 into r2;
-    output r2 as templateankara.aleo/mint_public.future;
+    output r2 as ankaraaew.aleo/mint_public.future;
 
 finalize mint_public:
     input r0 as address.public;
@@ -22,19 +21,17 @@ finalize mint_public:
     add r2 r1 into r3;
     set r3 into account[r0];
 
-
 function mint_private:
     input r0 as address.private;
     input r1 as u64.private;
     cast r0 r1 into r2 as token.record;
     output r2 as token.record;
 
-
 function transfer_public:
     input r0 as address.public;
     input r1 as u64.public;
     async transfer_public self.caller r0 r1 into r2;
-    output r2 as templateankara.aleo/transfer_public.future;
+    output r2 as ankaraaew.aleo/transfer_public.future;
 
 finalize transfer_public:
     input r0 as address.public;
@@ -47,7 +44,6 @@ finalize transfer_public:
     add r5 r2 into r6;
     set r6 into account[r1];
 
-
 function transfer_private:
     input r0 as token.record;
     input r1 as address.private;
@@ -58,7 +54,6 @@ function transfer_private:
     output r4 as token.record;
     output r5 as token.record;
 
-
 function transfer_private_to_public:
     input r0 as token.record;
     input r1 as address.public;
@@ -67,7 +62,7 @@ function transfer_private_to_public:
     cast r0.owner r3 into r4 as token.record;
     async transfer_private_to_public r1 r2 into r5;
     output r4 as token.record;
-    output r5 as templateankara.aleo/transfer_private_to_public.future;
+    output r5 as ankaraaew.aleo/transfer_private_to_public.future;
 
 finalize transfer_private_to_public:
     input r0 as address.public;
@@ -76,14 +71,13 @@ finalize transfer_private_to_public:
     add r2 r1 into r3;
     set r3 into account[r0];
 
-
 function transfer_public_to_private:
     input r0 as address.private;
     input r1 as u64.private;
     cast r0 r1 into r2 as token.record;
     async transfer_public_to_private self.caller r1 into r3;
     output r2 as token.record;
-    output r3 as templateankara.aleo/transfer_public_to_private.future;
+    output r3 as ankaraaew.aleo/transfer_public_to_private.future;
 
 finalize transfer_public_to_private:
     input r0 as address.public;
